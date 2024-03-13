@@ -1,0 +1,56 @@
+<div class="product" [attr.units-available]="product.uniAvailable">
+    <div [class]="'divImage'">
+        <img
+            (mouseenter)="onMouseEnter()"
+            (mouseleave)="onMouseLeave()"
+            [attr.src]="product.image" 
+            [alt]="product.name"
+            [style]="product.uniAvailable < 1 ?productImageStyle: ''"
+        >
+        <!--[class]="'border-btn'"-->
+        <img
+            [style] = productImage2Style
+            (mouseenter)="onMouseEnter2()"
+            (mouseleave)="onMouseLeave2()"
+            [src]="product2" style="width: 180px;"
+        >
+    </div>
+    <div class="product--info">
+        <h1 class="product--info__title">{{ product.name }}</h1>
+        <p class="product--info__description">{{ product.description }}</p>
+    </div>
+    <div class="product--actions">
+        <button
+            (click)="buyProduct()"
+            [disabled]="!(product.uniAvailable > 0)" 
+            class="product--actions__btn buy">BUY</button>
+        <button
+            (click)="addToCart()" 
+            class="product--actions__btn add"
+        >+ CART</button>
+    </div>
+</div>
+
+<form
+    [style.display]="!formState ?'none': 'block'"
+    class="miform"
+    >
+    <h2>Datos de compra</h2>
+    <label for="address">Dirección</label>
+    <input 
+        [(ngModel)]="addres"
+        type="text" 
+        name="address" 
+        id="address"
+    >
+    <label for="code">Código Postal</label>
+    <input
+        [(ngModel)]="postalCode" 
+        type="number" 
+        name="code" 
+        id="code"
+    >
+    <div>
+        <button (click)="orderProduct()">ORDER</button>
+    </div>
+</form>
